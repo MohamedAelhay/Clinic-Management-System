@@ -77,15 +77,9 @@ WSGI_APPLICATION = 'CMS.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-<<<<<<< HEAD
-        'NAME': 'CMS',
-        'USER': 'root',
-        'PASSWORD': 'Yousra15-11',
-=======
         'NAME': os.environ.get('DATABASE_NAME', ''),
         'USER': os.environ.get('DATABASE_USER', ''),
         'PASSWORD': os.environ.get('DATABASE_PASSWORD', ''),
->>>>>>> 4a3e002bf4e149d931bd6533050d24decb70f4b8
         'HOST': 'localhost',
         'PORT': '3306'
     }
