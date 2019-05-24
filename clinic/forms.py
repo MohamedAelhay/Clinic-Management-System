@@ -11,4 +11,5 @@ class PatientForm(forms.ModelForm):
 class VisitForm(forms.ModelForm):
     class Meta:
         model = Visit
-        fields = ('visit_date','patient','doctor')
+        fields = ('visit_date','patient','attending_doctor','referring_doctor','building',
+                    'floor', 'room', 'bed')
