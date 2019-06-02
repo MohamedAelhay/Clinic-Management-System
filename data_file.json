@@ -1,0 +1,1 @@
+"[{\"model\": \"clinic.visit\", \"pk\": 21, \"fields\": {\"visit_date\": \"8584-12-07T00:00:00Z\", \"patient\": 1, \"attending_doctor\": 1, \"referring_doctor\": 1, \"building\": 5, \"floor\": 10, \"room\": 52, \"bed\": 1}}]"
