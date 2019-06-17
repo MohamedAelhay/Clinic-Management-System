@@ -1,21 +1,25 @@
-{% extends "base.html" %} {% load static %}{% block main_block %}
-<div class="bg-img">
-    <div class="hotel-container">
-        <form method="POST" class="col-md"> {% csrf_token %}
-            <h1>New Patient</h1>
-            <div class="row">
-                <!-- <div class=" col-xs-6 form-group "> -->
-                <div class="col-md">
-                    <!-- form -->
-                    {{ patient_form.as_p }}
+{% extends "base.html" %} {% load static %} {% block content %}
+
+    <!-- ***** About Us Area Start ***** -->
+    <section class="medica-about-us-area">
+        <!-- Card Area -->
+        <div class="medica-card-area">
+            <div class="container">
+                <div class="row no-gutters">
+                        <div class="medica-appointment-card wow fadeInUp" data-wow-delay="0.6s">
+                            <h5>New Patient</h5>
+                            <form action="#" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                {{ patient_form.as_p}}
+                                </div>
+
+                                <button type="submit" class="btn medica-btn mt-15">Add New Patient</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <button type="submit" class="btn btn-primary ">Save</button>
-                <button type="reset" class="btn btn-secondary ">Reset</button>
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
 
 {% endblock %}

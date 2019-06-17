@@ -9,12 +9,14 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.core import serializers
 from clinic.serializer import DataSerializer
 
+def index(request):
+    return render(request, 'index.html')
+
 def new_patient(request):
     if request.method == 'POST':
         patient_form = PatientForm(request.POST)
         if patient_form.is_valid():
             patient_form.save()
-        #     return data_JSON(request)
             return HttpResponseRedirect("/clinic/visit")
     else:
         patient_form = PatientForm()
