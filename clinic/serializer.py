@@ -1,16 +1,23 @@
 from django.core.serializers.json import DjangoJSONEncoder
 import json
+import os 
 from datetime import datetime
 
-class DataSerializer:
+class ADTSerializer:
+    meta_data = {
+        'BROKER_KEY': os.environ.get('BROKER_KEY', ''),
+        'TE': "ADT",
+        'SCOPE': "A01",
+        'DEVICE': "1"
+    }
 
     def __init__(self,params):
-        self.patient = params[0]
-        self.visit = params[1]
-        self.attending_doctor = params[2]
-        self.referring_doctor = params[3]
-        self.meta_data = params[4]
-    
+        self.patient = params['patient']
+        self.visit = params['visit']
+        self.attending_doctor = params['attending_doctor']
+        self.referring_doctor = params['referring_doctor']
+
+
     def serialize(self):
         msg_dict = {
 

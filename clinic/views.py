@@ -7,7 +7,8 @@ import json
 import requests
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core import serializers
-from clinic.serializer import DataSerializer
+from clinic.serializer import ADTSerializer
+import os
 
 def index(request):
     return render(request, 'index.html')
@@ -28,35 +29,40 @@ def new_visit(request):
         visit_form = VisitForm(request.POST)
         if visit_form.is_valid():
             visit_form.save()
-            return data_JSON(request)
-        #     return HttpResponseRedirect("/clinic/new")
+            return send_request(request)
+            # if(is_request_sent):
+            #     return render(request, 'success.html')
+            # else:
+            #     return render(request, 'fail.html')
+
+
     else:
         visit_form = VisitForm()
         context = {'visit_form': visit_form}
         return render(request, 'visit.html', context)
 
 
-def data_JSON(request):
+def send_request(request):
 
     visit = Visit.objects.order_by('visit_id').last()
     patient = Patient.objects.get(pk=visit.patient_id)
     attending_doctor = Doctor.objects.get(pk=visit.attending_doctor_id)
     referring_doctor = Doctor.objects.get(pk=visit.referring_doctor_id)
 
-    meta_data = {
-        'BROKER_KEY': "32b846baece6563e9a54f9ff74ab79cf0c07daf77627fc2a10696612579e1df2",
-        'TE': "ADT",
-        'SCOPE': "A01",
-        'DEVICE': "1"
+    msg_data_dict = {
+        'patient' : patient,
+        'visit': visit,
+        'attending_doctor': attending_doctor,
+        'referring_doctor': referring_doctor
     }
-    
-    msg_data_arr = [patient,visit,attending_doctor,referring_doctor,meta_data]
-    
-    serialize_obj = DataSerializer(msg_data_arr)
+
+    serialize_obj = ADTSerializer(msg_data_dict)
     serialized_data = serialize_obj.serialize()
     print(serialized_data)
-    url = 'http://127.0.0.1:8001/api/parse/'
+    url = 'http://127.0.0.1:'+os.environ.get('BROKER_PORT', '')+'/api/parse/'
     req = requests.post(url, data=serialized_data, verify=False)
     print(req.status_code)
-#     return JsonResponse(req.status_code, safe=False)
-    return HttpResponse(req, content_type='application/json')    
+    if (req.status_code == 200):
+        return render(request, 'success.html', msg_data_dict)
+    else:
+        return render(request, 'fail.html')
