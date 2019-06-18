@@ -8,6 +8,7 @@ import requests
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core import serializers
 from clinic.serializer import DataSerializer
+from CMS import settings
 
 def index(request):
     return render(request, 'index.html')
@@ -44,7 +45,7 @@ def data_JSON(request):
     referring_doctor = Doctor.objects.get(pk=visit.referring_doctor_id)
 
     meta_data = {
-        'BROKER_KEY': "32b846baece6563e9a54f9ff74ab79cf0c07daf77627fc2a10696612579e1df2",
+        'BROKER_KEY': settings.BROKER_KEY,
         'TE': "ADT",
         'SCOPE': "A01",
         'DEVICE': "1"
