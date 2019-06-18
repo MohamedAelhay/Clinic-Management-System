@@ -21,5 +21,6 @@ from django.conf.urls import url
 urlpatterns = [
     path('admin/', admin.site.urls),
     url('clinic/', include('clinic.urls')),
+    url('', clinic.views.index, name= 'clinic'),
 
 ]
