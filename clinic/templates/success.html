@@ -9,7 +9,15 @@
 
                         <div class="medica-emergency-card wow fadeInUp" data-wow-delay="0.2s">
                             <h5>Success</h5>
-                            <h4>Your request has been successfully sent</h4>
+                            <h4>Your request has been successfully sent </h4>
+
+                            {% if visit %}
+                                <h4>for visit: </h4>
+                                <p>ID: {{visit.visit_id}}</p>
+                                <p>Date: {{visit.visit_date}} </p>
+                                <p>Patient Name: {{patient.patient_first_name}} {{patient.patient_family_name}}</p>
+                        
+                            {% endif %}
                         </div>
                 </div>
             </div>

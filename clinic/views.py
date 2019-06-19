@@ -86,6 +86,6 @@ def send_request(request):
     req = requests.post(url, data=serialized_data, verify=False)
     print(req.status_code)
     if (req.status_code == 200):
-        return render(request, 'success.html')
+        return render(request, 'success.html', msg_data_dict)
     else:
         return render(request, 'fail.html')
