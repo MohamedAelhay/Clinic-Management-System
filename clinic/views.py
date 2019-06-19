@@ -7,13 +7,7 @@ import json
 import requests
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core import serializers
-<<<<<<< HEAD
-# from clinic.serializer import DataSerializer
-from CMS import settings
-from clinic.serializer import ADTSerializer
-=======
 from clinic.serializer import ADTSerializer, ORMSerializer
->>>>>>> 78666d256c4e3e8907cf25d7a291b37c5574acdc
 import os
 
 def index(request):
@@ -25,15 +19,14 @@ def new_orm(request):
         if form.is_valid():
             serialized_obj = ORMSerializer(form)
             serialized_data = serialized_obj.serialize()
-            print(serialized_data)
             
-            # url = 'http://127.0.0.1:'+os.environ.get('BROKER_PORT', '')+'/api/parse/'
-            # req = requests.post(url, data=serialized_data, verify=False)
-            # print(req.status_code)
-            # if (req.status_code == 200):
-                # return render(request, 'success.html', msg_data_dict)
-            # else:
-                # return render(request, 'fail.html')
+            url = 'http://127.0.0.1:'+os.environ.get('BROKER_PORT', '')+'/api/parse/mwl/'
+            req = requests.post(url, data=serialized_data, verify=False)
+            print(req.status_code)
+            if (req.status_code == 200):
+                return render(request, 'success.html', msg_data_dict)
+            else:
+                return render(request, 'fail.html')
             return HttpResponseRedirect('/')
 
     else:

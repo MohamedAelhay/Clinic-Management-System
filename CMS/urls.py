@@ -17,10 +17,7 @@ from django.contrib import admin
 from django.conf.urls import include
 from django.conf.urls import url
 import clinic.views
-<<<<<<< HEAD
 
-=======
->>>>>>> 78666d256c4e3e8907cf25d7a291b37c5574acdc
 
 urlpatterns = [
     url('admin/', admin.site.urls),
