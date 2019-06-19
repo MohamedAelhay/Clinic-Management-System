@@ -100,3 +100,51 @@ class ADTSerializer:
             "FAMILY_NAME":self.attending_doctor.doctor_family_name,
             "GIVEN_NAME":self.attending_doctor.doctor_first_name
         } 
+
+
+
+class ORMSerializer:
+    meta_data = {
+        'BROKER_KEY': os.environ.get('BROKER_KEY', ''),
+        "TE": "ORM",
+        "SCOPE": "O01",
+        "DEVICE": "1"
+    }
+    msh = {
+        "SENDER":"ULTRASONIC11",
+        "TE":"ORM_O01",
+        "HL7Version": "2.5"
+    }
+    def __init__(self, form):
+        self.patient = form.cleaned_data['patient']
+        self.doctor = form.cleaned_data['doctor']
+        self.gender = form.cleaned_data['gender']
+        self.study_id = form.cleaned_data['study_id']
+        self.case = form.cleaned_data['case']
+
+    def serialize(self):
+        msg_dict = {
+            "META_DATA":self.meta_data,
+            "DATA":{
+                "MSH": self.msh,
+                "PID":{
+                        "PatientID":str(self.patient.patient_ssid),
+                        "DoctorID":str(self.doctor.doctor_ssid),
+                        "PatientName":self.patient.patient_family_name,
+                        "PatientDOB":self.patient.patient_birth_date.strftime('%m/%d/%Y'),
+                        "SEX": self.gender
+                },
+                "ORC":{
+                    "ORDER":"NW",
+                    "OrderID":"1"
+                },
+                "ZDS":{
+                    "StudyID":self.study_id
+                },
+                "OBR":{
+                    "ID":"1",
+                    "CASE": self.case
+                }
+            }
+        }
+        return json.dumps(msg_dict) 
