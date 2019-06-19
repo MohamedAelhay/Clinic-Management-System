@@ -1,0 +1,34 @@
+{
+	"META_DATA":{
+		"BROKER_KEY": "xxxx",
+        "TE": "ORM",
+        "SCOPE": "O01",
+        "DEVICE": "1"
+	},
+	"DATA":{
+		"MSH":{
+				"SENDER":"ULTRASONIC11",
+				"TE":"ORM_O01",
+				"HL7Version":"2.5"
+			},
+	    "PID":{
+	    		"PatientID":"P-ID-T2",
+	    		"DoctorID":"D-ID-T1",
+	    		"PatientName":"Post Man10",
+	    		"PatientDOB":"19000101",
+	    		"SEX":"M"
+	    },
+	    "ORC":{
+	    	"ORDER":"NW",
+	    	"OrderID":"1"
+	    },
+	    "ZDS":{
+	    	"StudyID":"StudyID-90"
+	    	
+	    },
+	    "OBR":{
+	    	"ID":"1",
+	    	"CASE":"X-RAY ANKLE"
+	    }
+	}
+}
