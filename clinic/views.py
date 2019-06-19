@@ -88,4 +88,5 @@ def send_request(request):
     if (req.status_code == 200):
         return render(request, 'success.html', msg_data_dict)
     else:
+        visit.delete()
         return render(request, 'fail.html')

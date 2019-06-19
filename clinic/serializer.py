@@ -8,6 +8,7 @@ class ADTSerializer:
         'BROKER_KEY': os.environ.get('BROKER_KEY', ''),
         'TE': "ADT",
         'SCOPE': "A01",
+        'DEVICE': "1"
     }
 
     def __init__(self,params):
