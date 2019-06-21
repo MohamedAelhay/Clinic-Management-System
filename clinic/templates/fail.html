@@ -8,7 +8,12 @@
                 <div class="row no-gutters">
                     <div class="medica-doctors-card wow fadeInUp" data-wow-delay="0.4s">
                         <h5>Sorry, your request failed.</h5>
-                        <a href="/clinic/visit">Try again</a>
+                        {% if request.path == '/clinic/visit' %}
+                        <a href="{% url 'new-visit' %}">Try again</a>
+                        {% endif %}
+                        {% if request.path == '/clinic/orm' %}
+                        <a href="{% url 'new-orm' %}">Try again</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
