@@ -1,5 +1,6 @@
 from django import forms
 from .models import Patient, Visit, Doctor
+import datetime
 
 class PatientForm(forms.ModelForm):
     class Meta: 
@@ -10,14 +11,16 @@ class PatientForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(PatientForm, self).__init__(*args, **kwargs)
+        self.fields['patient_ssid'].widget.attrs['min'] = 0
+        self.fields['patient_zip_code'].widget.attrs['min'] = 0
+        self.fields[ 'patient_birth_date'].input_formats = [ '%Y-%m-%d' ]
+
         for field_name in self.fields:
             field = self.fields.get(field_name)
             if field:
                 field.widget.attrs.update({
-                    'class': "form-control",
-                    'placeholder': field.label
+                    'class': "input100",
                 })
-                field.label = ''
 
 class VisitForm(forms.ModelForm):
     class Meta:
@@ -27,17 +30,17 @@ class VisitForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(VisitForm, self).__init__(*args, **kwargs)
+        self.fields['building'].widget.attrs['min'] = 0
+        self.fields['floor'].widget.attrs['min'] = 0
+        self.fields['room'].widget.attrs['min'] = 0
+        self.fields['bed'].widget.attrs['min'] = 0
+
         for field_name in self.fields:
             field = self.fields.get(field_name)
             if field:
                 field.widget.attrs.update({
-                    'class': "form-control",
-                    'placeholder': field.label
+                    'class': "input100",
                 })
-                if (field_name != 'patient' 
-                    and field_name != 'referring_doctor'
-                    and field_name != 'attending_doctor'):
-                    field.label = ''
 
 
 class ORMForm(forms.Form):
@@ -56,6 +59,5 @@ class ORMForm(forms.Form):
             field = self.fields.get(field_name)
             if field:
                 field.widget.attrs.update({
-                    'class': "form-control",
-                    'placeholder': field.label
+                    'class': "input100",
                 })
