@@ -1,24 +1,30 @@
 {% extends "base.html" %} {% load static %} {% block content %}
-
-    <!-- ***** About Us Area Start ***** -->
-    <section class="medica-about-us-area">
-        <!-- Card Area -->
-        <div class="medica-card-area">
-            <div class="container">
-                <div class="row no-gutters">
-                        <div class="medica-appointment-card wow fadeInUp" data-wow-delay="0.6s">
-                            <h5>New Visit</h5>
-                            <form method="post"> {% csrf_token %}
-                                
-                                <div class="form-group">
-                                    {{ visit_form.as_p }}
-                                </div>
-                                <button type="submit" class="btn medica-btn mt-15">Add new Visit</button>
-                            </form>
-                        </div>
+        <div class="container-contact100">
+            <div class="wrap-contact100">
+                <form class="contact100-form validate-form" method="post">
+                    {% csrf_token %}
+                    <span class="contact100-form-title">
+                        New Visit
+                    </span>
+    
+                    {% for field in visit_form %}
+                    <label class="label-input100" for="phone">{{ field.label }}</label>
+                    <div class="wrap-input100">
+                        {{ field }}
+                        <span class="focus-input100"></span>
                     </div>
-                </div>
+                    {% endfor %}
+
+                    <div class="container-contact100-form-btn">
+                        <button class="contact100-form-btn">
+                            <span>
+                                OK
+                                <i class="zmdi zmdi-arrow-right m-l-8"></i>
+                            </span>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
-
+    
 {% endblock %}

@@ -19,10 +19,8 @@ class PatientForm(forms.ModelForm):
             field = self.fields.get(field_name)
             if field:
                 field.widget.attrs.update({
-                    'class': "form-control",
-                    'placeholder': field.label
+                    'class': "input100",
                 })
-                field.label = ''
 
 class VisitForm(forms.ModelForm):
     class Meta:
@@ -41,13 +39,8 @@ class VisitForm(forms.ModelForm):
             field = self.fields.get(field_name)
             if field:
                 field.widget.attrs.update({
-                    'class': "form-control",
-                    'placeholder': field.label
+                    'class': "input100",
                 })
-                if (field_name != 'patient' 
-                    and field_name != 'referring_doctor'
-                    and field_name != 'attending_doctor'):
-                    field.label = ''
 
 
 class ORMForm(forms.Form):
@@ -66,6 +59,5 @@ class ORMForm(forms.Form):
             field = self.fields.get(field_name)
             if field:
                 field.widget.attrs.update({
-                    'class': "form-control",
-                    'placeholder': field.label
+                    'class': "input100",
                 })
