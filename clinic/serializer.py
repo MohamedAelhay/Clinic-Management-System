@@ -36,7 +36,7 @@ class ADTSerializer:
                         "ASSIGNING_AGENCY_OR_DEPARTMENT": "xxxxx"
                     },
                     "DATE_TIME_OF_BIRTH": {
-                        "TIME": self.patient.patient_birth_date.strftime('%m/%d/%Y'),
+                        "TIME": self.patient.patient_birth_date.strftime('%Y/%m/%d'),
                         "DEGREE_OF_PRECISION": "31"
                     },
                     "PATIENT_ADDRESS": self.addressSerializer(),

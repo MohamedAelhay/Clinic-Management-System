@@ -13,7 +13,7 @@ class PatientForm(forms.ModelForm):
         super(PatientForm, self).__init__(*args, **kwargs)
         self.fields['patient_ssid'].widget.attrs['min'] = 0
         self.fields['patient_zip_code'].widget.attrs['min'] = 0
-        self.fields[ 'patient_birth_date'].input_formats = [ '%Y-%m-%d' ]
+
 
         for field_name in self.fields:
             field = self.fields.get(field_name)
